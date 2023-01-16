@@ -1,0 +1,43 @@
+﻿@model Budget_Manager.Models.Category
+
+@{
+    ViewData["PageTitle"] = Model.CategoryID == 0 ? "Dodaj nową kategorię" : "Edytuj kategorię";
+}
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#001e28">
+        <form asp-action="CreateOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="CategoryID" value="@Model.CategoryID" />
+            <div class="mb-3">
+                <div class='e-btn-group custom-rbt-group'>
+                    <input type="radio" id="radioleft" name="Type" value="Wydatki" checked="@(Model.Type=="Expenses")" />
+                    <label class="e-btn" for="radioleft">Wydatki</label>
+                    <input type="radio" id="radiomiddle" name="Type" value="Przychody" checked="@(Model.Type=="Incomes")"/>
+                    <label class="e-btn" for="radiomiddle">Przychody</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <ejs-textbox id="title" placeholder="Nazwa" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
+                <span asp-validation-for="Title" class="text-danger fs-6"></span>
+            </div>
+            <div class="mb-3">
+                <ejs-textbox id="icon" placeholder="Symbol" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+            <ejs-button id="submit" content="Zatwierdź" cssClass="e-success"></ejs-button>
+        </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+            <div class="widget h-100 d-flex justify-content-center align-items-center d_guide" style="background-color:#001e28">
+                <h1 class="guide">Należy wybrać rodzaj dodawanej kategorii, następnie wpisać nazwę oraz wkleić symbol jej odpowiadający.</h1>
+            </div>
+    </div>
+</div>
+
+@*
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+*@

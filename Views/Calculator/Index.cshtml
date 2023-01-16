@@ -1,0 +1,125 @@
+﻿@model Budget_Manager.Models.Calculator;
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<script>
+    function calculate_buy1() {
+        
+        var a1 = parseFloat(document.getElementById("a1").value);
+        var a2 = document.getElementById("a2").value;
+        var a3 = parseFloat(document.getElementById("a3").value);
+
+        document.getElementById("result_buy1").innerHTML = "Za kwotę " + a1 + "zł otrzymasz " + (a1 / a3).toFixed(2) + a2;
+        }
+
+    function calculate_buy2() {
+
+        var a4 = parseFloat(document.getElementById("a4").value);
+        var a5 = document.getElementById("a5").value;
+        var a6 = parseFloat(document.getElementById("a6").value);
+
+        document.getElementById("result_buy2").innerHTML = "Aby zakupić " + a4 + a5 + " należy zapłacić " + (a4 * a6).toFixed(2) +"zł";
+    }
+
+    function calculate_sell() {
+
+        var s1 = parseFloat(document.getElementById("s1").value);
+        var s2 = document.getElementById("s2").value;
+        var s3 = parseFloat(document.getElementById("s3").value);
+
+        document.getElementById("result_sale").innerHTML = "Za kwotę " + s1 + s2 + " otrzymasz " + (s1 * s3).toFixed(2) + "zł";
+    }
+
+    function left_switch() {
+        if (document.getElementById('radioleft').checked) {
+            document.getElementById('hidder1').style.display = 'block';
+            document.getElementById('hidder2').style.display = 'none';
+        }
+    }
+
+    function right_switch() {
+        if (document.getElementById('radioright').checked) {
+            document.getElementById('hidder2').style.display = 'block';
+            document.getElementById('hidder1').style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="text-center calculator">
+        <div class="row mb-10">
+            <div class="col-md-6">
+                <div class="widget">
+                    <div class="card-subtitle p-4">
+                        <div id="hidder1">
+                            <h5 class="fw-bold">Zakup waluty</h5>
+                            <p class="descript">Kwota PLN</p>
+                            <div class="e-float-input">
+                                <input type="number" id="a1" placeholder="0" required />
+                            </div>
+                            <p class="descript">Symbol kupowanej waluty</p>
+                            <div class="e-float-input">
+                                <input type="text" id="a2" placeholder="np.$" required />
+                            </div>
+                            <p class="descript">Kurs kupna waluty</p>
+                            <div class="e-float-input">
+                                <input type="number" id="a3" placeholder="0.0" required />
+                            </div>
+                            <div>
+                                <p id="result_buy1"></p>
+                                <button class="btn-add" onclick="calculate_buy1()">Oblicz</button>
+                            </div>
+                        </div>
+                        <div id="hidder2">
+                            <h5 class="fw-bold">Zakup waluty</h5>
+                            <p class="descript">Kwota kupowanej waluty</p>
+                            <div class="e-float-input">
+                                <input type="number" id="a4" placeholder="0" required />
+                            </div>
+                            <p class="descript">Symbol kupowanej waluty</p>
+                            <div class="e-float-input">
+                                <input type="text" id="a5" placeholder="np.$" required />
+                            </div>
+                            <p class="descript">Kurs kupna waluty</p>
+                            <div class="e-float-input">
+                                <input type="number" id="a6" placeholder="0.0" required />
+                            </div>
+                            <div>
+                                <p id="result_buy2"></p>
+                                <button class="btn-add" onclick="calculate_buy2()">Oblicz</button>
+                            </div>
+                        </div>
+                        <div id="choose" class='e-btn-group custom-rbt-group'>
+                            <input type="radio" id="radioleft" name="hidder_radio" value="Sposob1" checked="checked" onclick="left_switch()" />
+                            <label class="e-btn" for="radioleft">Sposób 1</label>
+                            <input type="radio" id="radioright" name="hidder_radio" value="Sposob2" onclick="right_switch()"/>
+                            <label class="e-btn" for="radioright">Sposób 2</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="widget">
+                    <div class="card-subtitle p-4">
+                        <h5 class="fw-bold">Sprzedaż waluty</h5>
+                            <p class="descript">Kwota sprzedawanej waluty</p>
+                            <div class="e-float-input">
+                                <input type="number" id="s1" placeholder="0" required />
+                            </div>
+                            <p class="descript">Symbol sprzedawanej waluty</p>
+                            <div class="e-float-input">
+                                <input type="text" id="s2" placeholder="np.$" required />
+                            </div>
+                            <p class="descript">Kurs sprzedaży waluty</p>
+                            <div class="e-float-input">
+                                <input type="number" id="s3" placeholder="0.0" required />
+                            </div>
+                            <div>
+                                <p id="result_sale"></p>
+                                <button class="btn-add" onclick="calculate_sell()">Oblicz</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

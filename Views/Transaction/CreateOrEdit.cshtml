@@ -1,0 +1,53 @@
+﻿@model Budget_Manager.Models.Transaction
+
+@{
+    ViewData["PageTitle"] = Model.TransactionID == 0 ? "Dodaj nową transakcję" : "Edytuj transakcję";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#001e28">
+        <form asp-action="CreateOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="TransactionID" value="@Model.TransactionID" />
+            <div class="mb-3">
+                <ejs-datepicker id="Date" ejs-for="Date" 
+                placeholder="Data" floatLabelType="Always"
+                format="d/M/y"></ejs-datepicker>
+            </div>
+            <div class="mb-3">
+                <ejs-dropdownlist id="ddlCategory" ejs-for="CategoryID"
+                dataSource="@ViewBag.Categories" placeholder="Kategoria"
+                floatLabelType="Always" allowFiltering="true" ignoreAccent="true"
+                filterType="Contains" popupHeight="250px">
+            <e-dropdownlist-fields value="CategoryID" text="TitleWithIcon"></e-dropdownlist-fields>
+            </ejs-dropdownlist>
+            <span asp-validation-for="CategoryID" class="text-danger fs-6"></span>
+            </div>
+            <div class="mb-3">
+                <ejs-numerictextbox id="amount" ejs-for="Amount" placeholder="Kwota" 
+                floatLabelType="Always" min=0 format=""></ejs-numerictextbox>
+                <span asp-validation-for="Amount" class="text-danger fs-6"></span>
+            </div>
+            
+            <div class="mb-3">
+                <ejs-textbox id="description" placeholder="Opis" ejs-for="Description"
+                floatLabelType="Always" multiline="true"></ejs-textbox>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <ejs-button id="submit" content="Zatwierdź" cssClass="e-success"></ejs-button>
+        </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+            <div class="widget h-100 d-flex justify-content-center align-items-center d_guide" style="background-color:#001e28">
+            <h1 class="guide">Należy wybrać datę oraz kategorię dodawanej transakcji, a następnie wpisać kwotę i opis.</h1>
+            </div>
+    </div>
+</div>
+
+@*
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+*@
